@@ -22,5 +22,5 @@ create(images, options)
       return testedRes === exp;
     });
     if (result) console.log('Test passed.');
-    else console.log('Test failed.');
+    else throw new Error('Test failed.');
   });
