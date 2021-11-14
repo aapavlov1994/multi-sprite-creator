@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const getSprites = require('../src');
+const { create: createSprites } = require('../src');
 
 const dir = path.resolve('./assets');
 const output = path.resolve('./output');
@@ -14,15 +14,18 @@ if (fs.existsSync(output)) {
 
 const options = {
   scale: 1,
-  maxWidth: 500,
+  padding: 1,
   maxHeight: 500,
+  maxWidth: 500,
 };
 
-getSprites(images, options)
+createSprites(images, options)
   .then((sprites) => {
-    console.log(sprites);
     sprites.forEach((sprite, index) => {
-      const writeStream = fs.createWriteStream(path.resolve(output, `sprite${index}.png`));
-      sprite.data.pipe(writeStream);
+      const spritePath = path.resolve(output, `sprite${index}.png`);
+      fs.writeFileSync(spritePath, sprite.image, { encoding: 'utf8' });
+      const mapJSON = JSON.stringify(sprite.map);
+      fs.writeFileSync(path.resolve(output, `map${index}.json`), mapJSON, { encoding: 'utf8' });
     });
+    console.log('Sprites and maps created successfully.');
   });

@@ -3,10 +3,10 @@
 // https://github.com/gopherwood/spritesheet.js/blob/master/lib/sorter/sorter.js
 
 const sorters = {
-  w(a, b) { return b.w - a.w; },
-  h(a, b) { return b.h - a.h; },
-  max(a, b) { return Math.max(b.w, b.h) - Math.max(a.w, a.h); },
-  min(a, b) { return Math.min(b.w, b.h) - Math.min(a.w, a.h); },
+  width(a, b) { return b.width - a.width; },
+  height(a, b) { return b.height - a.height; },
+  max(a, b) { return Math.max(b.width, b.height) - Math.max(a.width, a.height); },
+  min(a, b) { return Math.min(b.width, b.height) - Math.min(a.width, a.height); },
 };
 
 const sortByMultipleCriteria = (a, b, criteria) => {
@@ -18,5 +18,5 @@ const sortByMultipleCriteria = (a, b, criteria) => {
 };
 
 module.exports = function sortImages(images) {
-  images.sort((a, b) => sortByMultipleCriteria(a, b, ['max', 'min', 'h', 'w']));
+  images.sort((a, b) => sortByMultipleCriteria(a, b, ['max', 'min', 'height', 'width']));
 };

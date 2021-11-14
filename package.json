@@ -7,7 +7,7 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint ./src"
+    "lint": "eslint ./src ./example"
   },
   "repository": {
     "type": "git",
@@ -28,9 +28,10 @@
   },
   "homepage": "https://github.com/aapavlov1994/multi-sprite-creator#readme",
   "dependencies": {
-    "buffer-image-size": "^0.6.4",
+    "concat-stream": "^2.0.0",
     "jimp": "^0.16.1",
     "pixelsmith": "^2.5.0",
+    "through2": "^4.0.2",
     "vinyl": "^2.2.1"
   },
   "devDependencies": {
@@ -53,6 +54,9 @@
     ],
     "parserOptions": {
       "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-console": "off"
     }
   }
 }
