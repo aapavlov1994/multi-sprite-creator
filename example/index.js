@@ -13,7 +13,7 @@ if (fs.existsSync(output)) {
 } else fs.mkdirSync(output);
 
 const options = {
-  scale: 1,
+  scale: 0.7,
   padding: 1,
   maxHeight: 500,
   maxWidth: 500,

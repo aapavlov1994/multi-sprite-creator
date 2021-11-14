@@ -7,7 +7,9 @@
     "src"
   ],
   "scripts": {
-    "lint": "eslint ./src ./example"
+    "lint": "eslint ./src ./example",
+    "example": "node ./example",
+    "test": "node ./example/test"
   },
   "repository": {
     "type": "git",
