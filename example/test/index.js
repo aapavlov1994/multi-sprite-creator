@@ -21,6 +21,11 @@ create(images, options)
       const exp = JSON.stringify(expectedOutput[index]);
       return testedRes === exp;
     });
-    if (result) console.log('Test passed.');
-    else throw new Error('Test failed.');
+    if (result) {
+      console.log('Test passed.');
+      process.exit(0);
+    } else {
+      console.log('Test failed.');
+      process.exit(1);
+    }
   });
