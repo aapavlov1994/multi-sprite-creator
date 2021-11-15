@@ -1,0 +1,64 @@
+{
+  "name": "multi-sprite-creator",
+  "version": "1.0.0",
+  "description": "Tool for creating sprites with width and height limitation",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "lint": "eslint ./src ./example",
+    "example": "node ./example",
+    "test": "node ./example/test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aapavlov1994/multi-sprite-creator.git"
+  },
+  "keywords": [
+    "sprite",
+    "multi",
+    "maxsize",
+    "width",
+    "limit",
+    "creator"
+  ],
+  "author": "Anton Pavlov <aapavlov1994@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aapavlov1994/multi-sprite-creator/issues"
+  },
+  "homepage": "https://github.com/aapavlov1994/multi-sprite-creator#readme",
+  "dependencies": {
+    "concat-stream": "^2.0.0",
+    "jimp": "^0.16.1",
+    "pixelsmith": "^2.5.0",
+    "through2": "^4.0.2",
+    "vinyl": "^2.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-sonarjs": "^0.10.0"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "plugins": [
+      "import"
+    ],
+    "extends": [
+      "airbnb-base",
+      "plugin:sonarjs/recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {
+      "no-console": "off"
+    }
+  }
+}
