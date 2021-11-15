@@ -13,23 +13,37 @@ const options = {
   maxWidth: 500,
 };
 
+const replacePathsWithNames = (map) => {
+  map.forEach((img, i) => {
+    // eslint-disable-next-line no-useless-escape
+    const [match] = map[i].path.match(/[\\\/][^\\\/]+$/mg);
+    // eslint-disable-next-line no-param-reassign
+    map[i].path = match.slice(1);
+  });
+};
+
 const endTask = (message, code) => {
   console.log(message);
   process.exit(code);
 };
 
-create(images, options)
-  .then((sprites) => {
-    const result = sprites.every((sprite, index) => {
-      const { map } = sprite;
-      const testedRes = JSON.stringify(map);
-      const exp = JSON.stringify(expectedOutput[index]);
-      if (testedRes === exp) return true;
-      const indexFail = testedRes.split('').findIndex((el, i) => testedRes[i] !== exp[i]);
-      console.log('real', testedRes.slice(0, indexFail + 1));
-      console.log('expected', exp.slice(0, indexFail + 1));
-      return false;
+try {
+  create(images, options)
+    .then((sprites) => {
+      const result = sprites.every((sprite, index) => {
+        const { map } = sprite;
+        replacePathsWithNames(map);
+        const testedRes = JSON.stringify(map);
+        const exp = JSON.stringify(expectedOutput[index]);
+        if (testedRes === exp) return true;
+        const indexFail = testedRes.split('').findIndex((el, i) => testedRes[i] !== exp[i]);
+        console.log('real', testedRes.slice(0, indexFail + 1));
+        console.log('expected', exp.slice(0, indexFail + 1));
+        return false;
+      });
+      if (result) endTask('Test passed.', 0);
+      else endTask('Test failed.', 1);
     });
-    if (result) endTask('Test passed.', 0);
-    else endTask('Test failed.', 1);
-  });
+} catch (e) {
+  endTask('Test failed with error', 1);
+}
