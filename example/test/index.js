@@ -13,19 +13,23 @@ const options = {
   maxWidth: 500,
 };
 
+const endTask = (message, code) => {
+  console.log(message);
+  process.exit(code);
+};
+
 create(images, options)
   .then((sprites) => {
     const result = sprites.every((sprite, index) => {
       const { map } = sprite;
       const testedRes = JSON.stringify(map);
       const exp = JSON.stringify(expectedOutput[index]);
-      return testedRes === exp;
+      if (testedRes === exp) return true;
+      const indexFail = testedRes.split('').findIndex((el, i) => testedRes[i] !== exp[i]);
+      console.log('real', testedRes.slice(0, indexFail + 1));
+      console.log('expected', exp.slice(0, indexFail + 1));
+      return false;
     });
-    if (result) {
-      console.log('Test passed.');
-      process.exit(0);
-    } else {
-      console.log('Test failed.');
-      process.exit(1);
-    }
+    if (result) endTask('Test passed.', 0);
+    else endTask('Test failed.', 1);
   });
