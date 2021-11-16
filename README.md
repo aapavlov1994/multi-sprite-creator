@@ -16,26 +16,47 @@ const options = {
   maxWidth: 500, // sprite width limit
 };
 
+// use array of paths
+const imagesCollection = [
+  'pathTo/img1.png',
+  'pathTo/img2.png',
+];
+// or array of node buffers
+const imagesCollection = [
+  Buffer1,
+  Buffer2,
+];
+// or collection of paths
+const imagesCollection = {
+  img1Name: 'pathTo/img1.png',
+  img2Name: 'pathTo/img2.png',
+};
+// or collection of node buffers
+const imagesCollection = {
+  img1Name: Buffer1,
+  img2Name: Buffer2,
+};
+
 // use this function if you want caclulate and create spritesheets
-create(imagesPaths, options)
+create(imagesCollection, options)
   .then((sprites) => {
     console.log(sprites); // sprites array
     sprites.forEach((sprite) => {
       console.log(sprite.width); // result width (<= maxWidth)
       console.log(sprite.height); // result height (<= maxHeight)
-      console.log(sprite.map); // images coordinates, sizes, paths
+      console.log(sprite.map); // images coordinates, sizes, keys or imageNames
       console.log(sprite.image); // buffer ready to write
     });
   });
 
 // use this function if you want only caclulate sprites maps (atlases)
-calculate(imagesPaths, options)
+calculate(imagesCollection, options)
   .then((atlases) => {
     console.log(atlases); // atlases array
     atlases.forEach((atlas) => {
       console.log(atlas.width); // result width (<= maxWidth)
       console.log(atlas.height); // result height (<= maxHeight)
-      console.log(atlas.files); // images coordinates, sizes, paths, buffers
+      console.log(atlas.files); // images coordinates, sizes,  keys or imageNames, buffers
     });
   });
 ```

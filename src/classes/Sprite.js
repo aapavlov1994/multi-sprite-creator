@@ -2,7 +2,7 @@
  * @typedef { Object } SpriteImageProps
  * @property { number } SpriteImageProps.width
  * @property { number } SpriteImageProps.height
- * @property { string } SpriteImageProps.path
+ * @property { string } SpriteImageProps.key
  * @property { number } SpriteImageProps.x
  * @property { number } SpriteImageProps.y
  */
@@ -24,7 +24,7 @@ module.exports = class Sprite {
   constructor(atlas, image) {
     const { width, height, files } = atlas;
     const map = files.map((file) => ({
-      width: file.width, height: file.height, path: file.path, x: file.x, y: file.y,
+      width: file.width, height: file.height, key: file.key, x: file.x, y: file.y,
     }));
     this.width = width;
     this.height = height;

@@ -21,7 +21,8 @@ const defaultOptions = {
 
 /**
  * calculateAtlases - this function calculates maps for your images with chosen params
- * @param imagesPaths { string[] } absolute paths to your images
+ * @param imagesPaths { string[] | Buffer[]
+ * | Object.<string, Buffer> |  Object.<string, string> } absolute paths to your images
  * @param options { Options }
  * @returns {Promise<[Atlas]>}
  */
@@ -37,7 +38,8 @@ const calculateAtlases = (imagesPaths, options) => {
 
 /**
  * createSprites - this function creates sprites and maps for your images
- * @param imagesPaths { string[] } absolute paths to your images
+ * @param imagesPaths { string[] | Buffer[]
+ * | Object.<string, Buffer> |  Object.<string, string> } absolute paths to your images
  * @param options { Options }
  * @returns {Promise<[Sprite]>}
  */

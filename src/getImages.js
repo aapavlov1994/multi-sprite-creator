@@ -1,13 +1,17 @@
 const Jimp = require('jimp');
 
-const getBuffer = (jimpInstance, path) => (
+const getBuffer = (jimpInstance, key) => (
   new Promise((resolve) => {
     const { width, height } = jimpInstance.bitmap;
     // eslint-disable-next-line no-underscore-dangle
-    jimpInstance.getBufferAsync(jimpInstance._originalMime)
+    const { _originalMime: mime } = jimpInstance;
+    const extension = mime.includes('image/')
+      ? `.${mime.slice(6)}`
+      : '.png';
+    jimpInstance.getBufferAsync(mime)
       .then((buffer) => {
         resolve({
-          buffer, width, height, path,
+          buffer, width, height, key, extension,
         });
       });
   })
@@ -26,7 +30,7 @@ module.exports = function getImages(assets, options) {
   const promises = Object.keys(assets).map((key) => (
     Jimp.read(assets[key])
       .then((jimpInstance) => getScaleAsset(jimpInstance, options.scale))
-      .then((scaleInstance) => getBuffer(scaleInstance, assets[key]))
+      .then((scaleInstance) => getBuffer(scaleInstance, key))
   ));
   return Promise.all(promises);
 };
