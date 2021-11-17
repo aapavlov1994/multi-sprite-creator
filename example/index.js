@@ -2,9 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const { create: createSprites } = require('../src');
 
-const dir = path.resolve('./assets');
-const output = path.resolve('./output');
-const images = fs.readdirSync(dir).map((img) => path.join(dir, img));
+const dir = path.resolve('./example/assets');
+const output = path.resolve('./example/output');
+const images = {};
+fs.readdirSync(dir).forEach((img) => { images[img] = path.join(dir, img); });
 
 if (fs.existsSync(output)) {
   fs.readdirSync(output).forEach((img) => {

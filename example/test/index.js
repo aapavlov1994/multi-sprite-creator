@@ -13,15 +13,6 @@ const options = {
   maxWidth: 500,
 };
 
-const replacePathsWithNames = (map) => {
-  map.forEach((img, i) => {
-    // eslint-disable-next-line no-useless-escape
-    const [match] = map[i].path.match(/[\\\/][^\\\/]+$/mg);
-    // eslint-disable-next-line no-param-reassign
-    map[i].path = match.slice(1);
-  });
-};
-
 const endTask = (message, code) => {
   console.log(message);
   process.exit(code);
@@ -32,7 +23,6 @@ try {
     .then((sprites) => {
       const result = sprites.every((sprite, index) => {
         const { map } = sprite;
-        replacePathsWithNames(map);
         const testedRes = JSON.stringify(map);
         const exp = JSON.stringify(expectedOutput[index]);
         if (testedRes === exp) return true;

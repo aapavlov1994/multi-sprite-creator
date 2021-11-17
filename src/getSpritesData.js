@@ -1,17 +1,19 @@
 const Pixelsmith = require('pixelsmith');
-const Vinyl = require('vinyl');
+const File = require('vinyl');
 const concat = require('concat-stream');
 const through2 = require('through2');
 const Sprite = require('./classes/Sprite');
 
 /**
- * @param { Atlas }atlas
+ * @param { Atlas } atlas
  * @returns {Promise<Sprite>}
  */
 const getSprite = (atlas) => (
   new Promise((resolve) => {
     const { width, height, files } = atlas;
-    const vinyls = files.map(({ buffer, path }) => new Vinyl({ contents: buffer, path }));
+    const vinyls = files.map(({ buffer, key, extension }) => (
+      new File({ contents: buffer, key, path: extension })
+    ));
 
     const pixelsmith = new Pixelsmith();
     pixelsmith.createImages(vinyls, (err, images) => {
